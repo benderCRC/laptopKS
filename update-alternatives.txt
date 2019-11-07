@@ -1,1 +1,3 @@
 sudo update-alternatives --set x-session-manager /usr/bin/gnome-session-classic
+
+update-alternatives --config x-session-manager
