@@ -1,3 +1,18 @@
 sudo update-alternatives --set x-session-manager /usr/bin/gnome-session-classic
 
 update-alternatives --config x-session-manager
+
+
+
+
+/etc/gdm/PostSession/Default
+
+
+
+#!/bin/sh
+
+sed -i '' -e 's|^XSession=.*|XSession=gnome-classic|' /var/lib/AccountsService/users/user
+sed -i '' -e 's|^XSession=.*|XSession=gnome-classic|' /var/lib/AccountsService/users/root
+
+exit 0
+
