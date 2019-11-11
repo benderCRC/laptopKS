@@ -3,7 +3,7 @@
 #echo -e "\e[31mOld Password is password\e[0m"
 
 #Login as Root
-spawn /bin/bash -- -c "su"
+spawn /bin/bash -c "su"
 expect "assword"
 send "password\r"
 
@@ -13,17 +13,17 @@ expect "root@"
 send "passwd user\r"
 
 expect 'password for user'
-send 'test\r'
+send 'testtesttest\r'
 
 expect 'password for user'
-send 'test\r'
+send 'testtesttest\r'
 
 #Change password for Root
 send 'passwd root\r'
 expect 'password for user'
-send 'test\r'
+send 'testtesttest\r'
 expect 'password for user'
-send 'test\r'
+send 'testtesttest\r'
 
 #rm -f /etc/sddm.conf
 #rm -f $0 &
