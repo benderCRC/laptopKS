@@ -14,7 +14,7 @@ proc getPass {prompt} {
 #echo -e "\e[31mOld Password is password\e[0m"
 
 #end_user "Enter New Password"
-set pass  [getPass "Password    : "]
+set pass  [getPass "Enter New Password    : "]
 #puts {}
 #puts "You entered password : \"$pass\""
 
@@ -40,12 +40,12 @@ send "$pass\r"
 expect "root@"
 send "passwd root\r"
 expect "password for user"
-sleep2
+sleep 2
 send "$pass\r"
 expect "password"
 sleep 2
 send "$pass\r"
 
-#rm -f /etc/sddm.conf
-#rm -f $0 &
-#exit 0
+rm -f /etc/sddm.conf
+rm -f $0 &
+exit 0
