@@ -1,30 +1,14 @@
-#!/bin/bash
-figlet -f banner change password
-echo -e "\e[31mOld Password is password\e[0m"
-passwd user
-passwd root
-rm -f /etc/sddm.conf
-#rm -f $0 &
-exit 0
-
-
-yum install expect
-
-
-
-
 #! /usr/bin/expect
 
-spawn jarsigner ... # actual command here
-expect "Enter Passphrase for keystore: "
-send "jar_password\r"
+#echo -e "\e[31mOld Password is password\e[0m"
 
-
-
-spawn su
+#Login as Root
+spawn /bin/bash -- -c "su"
 expect "assword"
 send "password\r"
 
+
+#Change password of user
 expect "root@"
 send "passwd user\r"
 
@@ -34,8 +18,13 @@ send 'test\r'
 expect 'password for user'
 send 'test\r'
 
+#Change password for Root
 send 'passwd root\r'
 expect 'password for user'
 send 'test\r'
 expect 'password for user'
 send 'test\r'
+
+#rm -f /etc/sddm.conf
+#rm -f $0 &
+#exit 0
