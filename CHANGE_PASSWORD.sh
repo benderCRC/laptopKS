@@ -9,14 +9,14 @@ proc getPass {prompt} {
   send_user "\n"
   eval stty $oldmode
   return $expect_out(1,string)
-
+}
 
 #echo -e "\e[31mOld Password is password\e[0m"
 
 #end_user "Enter New Password"
-set pass  [getpass "Password    : "]
-puts {}
-puts "You entered password : \"$pass\""
+set pass  [getPass "Password    : "]
+#puts {}
+#puts "You entered password : \"$pass\""
 
 #Login as Root
 spawn /bin/bash -c "su"
@@ -30,21 +30,21 @@ send "passwd user\r"
 
 expect "password for user"
 sleep 2
-send "testtesttest\r"
+send "$pass\r"
 
 expect "password"
 sleep 2
-send "testtesttest\r"
+send "$pass\r"
 
 #Change password for Root
 expect "root@"
 send "passwd root\r"
 expect "password for user"
 sleep2
-send "testtesttest\r"
+send "$pass\r"
 expect "password"
 sleep 2
-send "testtesttest\r"
+send "$pass\r"
 
 #rm -f /etc/sddm.conf
 #rm -f $0 &
