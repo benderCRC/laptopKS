@@ -1,6 +1,22 @@
 #! /usr/bin/expect
 
+proc getPass {prompt} {
+  package require Expect
+  set oldmode [stty -echo -raw]
+  send_user "$prompt"
+  set timeout -1
+  expect_user -re "(.*)\n"
+  send_user "\n"
+  eval stty $oldmode
+  return $expect_out(1,string)
+
+
 #echo -e "\e[31mOld Password is password\e[0m"
+
+#end_user "Enter New Password"
+set pass  [getpass "Password    : "]
+puts {}
+puts "You entered password : \"$pass\""
 
 #Login as Root
 spawn /bin/bash -c "su"
@@ -13,17 +29,21 @@ expect "root@"
 send "passwd user\r"
 
 expect "password for user"
+sleep 2
 send "testtesttest\r"
 
-expect "password for user"
+expect "password"
+sleep 2
 send "testtesttest\r"
 
 #Change password for Root
-expect "passwd"
+expect "root@"
 send "passwd root\r"
 expect "password for user"
+sleep2
 send "testtesttest\r"
-expect "password for user"
+expect "password"
+sleep 2
 send "testtesttest\r"
 
 #rm -f /etc/sddm.conf
