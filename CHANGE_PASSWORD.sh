@@ -12,18 +12,18 @@ send "password\r"
 expect "root@"
 send "passwd user\r"
 
-expect 'password for user'
-send 'testtesttest\r'
+expect "password for user"
+send "testtesttest\r"
 
-expect 'password for user'
-send 'testtesttest\r'
+expect "password for user"
+send "testtesttest\r"
 
 #Change password for Root
-send 'passwd root\r'
-expect 'password for user'
-send 'testtesttest\r'
-expect 'password for user'
-send 'testtesttest\r'
+send "passwd root\r"
+expect "password for user"
+send "testtesttest\r"
+expect "password for user"
+send "testtesttest\r"
 
 #rm -f /etc/sddm.conf
 #rm -f $0 &
