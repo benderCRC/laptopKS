@@ -19,6 +19,7 @@ expect "password for user"
 send "testtesttest\r"
 
 #Change password for Root
+expect "passwd"
 send "passwd root\r"
 expect "password for user"
 send "testtesttest\r"
