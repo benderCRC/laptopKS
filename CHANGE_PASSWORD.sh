@@ -49,6 +49,6 @@ send "$pass\r"
 expect "root@"
 send "rm -f /etc/sddm.conf\r"
 expect "root@"
-send "rm -f ~user/Desktop/*.sh"
+send "rm -f ~user/Desktop/*.sh\r"
 
 exit 0
