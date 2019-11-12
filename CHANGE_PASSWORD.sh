@@ -46,6 +46,9 @@ expect "password"
 sleep 2
 send "$pass\r"
 
-rm -f /etc/sddm.conf
-rm -f $0 &
+expect "root@"
+send "rm -f /etc/sddm.conf\r"
+expect "root@"
+send "rm -f ~user/Desktop/*.sh"
+
 exit 0
