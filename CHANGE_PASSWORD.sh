@@ -50,5 +50,6 @@ expect "root@"
 send "rm -f /etc/sddm.conf\r"
 expect "root@"
 send "rm -f ~user/Desktop/*.sh\r"
-
+expect "root@"
+send "pkill konsole"
 exit 0
