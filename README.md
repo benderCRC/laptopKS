@@ -1,6 +1,6 @@
 # laptopKS
 
-Foobar is a Python library for dealing with word pluralization.
+An Anaconda KS to securely wipe a laptop and install Fedora with specific extra packages
 
 ## Prerequisites
 
@@ -24,14 +24,14 @@ yum install httpd
 ```
 
 Enable the Services
-'''bash
+```bash
 systemctl enable dnsmasq
 systemctl enable vsftpd
 systemctl enable httpd
-'''
+```
 
 Edit the Firewall
-'''bash
+```bash
 firewall-cmd --add-service=ftp --permanent  	## Port 21
 firewall-cmd --add-service=http --permanent  	## Port 80
 firewall-cmd --add-service=dns --permanent  	## Port 53
@@ -39,13 +39,13 @@ firewall-cmd --add-service=dhcp --permanent  	## Port 67
 firewall-cmd --add-port=69/udp --permanent  	## Port for TFTP
 firewall-cmd --add-port=4011/udp --permanent  ## Port for ProxyDHCP
 firewall-cmd --reload  ## Apply rules
-'''
+```
 
 Create the files
-'''bash
+```bash
 ln -s  /var/lib/tftpboot/ /tftpboot
 mkdir /var/lib/tftpboot/pxelinux.cfg
-'''
+```
 
 ```python
 import foobar
