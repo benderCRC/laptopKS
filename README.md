@@ -41,14 +41,12 @@ Install the following software
 yum install dnsmasq
 yum install syslinux
 yum install tftp-server
-yum install vsftpd
 yum install httpd
 ```
 
 Enable the Services
 ```bash
 systemctl enable dnsmasq
-systemctl enable vsftpd
 systemctl enable httpd
 ```
 
@@ -69,3 +67,10 @@ ln -s  /var/lib/tftpboot/ /tftpboot
 mkdir /var/lib/tftpboot/pxelinux.cfg
 ```
 
+Copy repo for Fedora (30 in this example)
+```bash
+cd /var/www/html
+mkdir 30
+cd 30
+wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
+```
