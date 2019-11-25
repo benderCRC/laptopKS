@@ -98,8 +98,13 @@ mkdir 30
 cd 30
 wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
 ```
+FOR RHEL/CentOS ONLY
 
-
+Mount the ISO and copy the files to use as a repo
+```bash
+mount -o loop $NAME_OF_CENTOS.iso  /mnt
+cp -r /mnt/*  /var/www/html/$NAME 
+```
 Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
 
 For Fedora net-install I download the iso then mount it and copy the files
@@ -139,6 +144,7 @@ append initrd=f30n/initrd.img ramdisk_size=100000 ks=http://192.168.1.20/ks/ks.c
 #kernel $foldername/vmlinuz
 #append initrd=$foldername/initrd.img ramdisk_size=100000 ip=dhcp inst.repo=http://192.168.1.20/$repo devfs=nomount ks=http://192.168.1.20/ks/$ks
 ```
+For RHEL/CentOS change ```inst.repo=``` to ```method=``` this is because it is not a netinstall but a clone of a disk
 
 ## Copy the Kickstart file 
 
