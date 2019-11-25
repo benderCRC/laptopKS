@@ -120,6 +120,8 @@ Enter command: ```service dnsmasq restart```
 
 Create file /tftpboot/pxelinux.cfg/default
 
+Paste in the below text, the 2nd commented out entry can be used as a template for another OS entry
+
 ```bash
 default menu.c32
 prompt 0
