@@ -97,3 +97,46 @@ enable-tftp
 tftp-root=/var/lib/tftpboot
 ```
 
+Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
+
+For Fedora net install I download the iso then mount it and copy the files
+
+```bash
+cd ~/Downloads
+wget https://mirrors.rit.edu/fedora/fedora/linux/releases/30/Server/x86_64/iso/Fedora-Server-dvd-x86_64-30-1.2.iso
+mount -o loop Fedora-Server-dvd-x86_64-30-1.2.iso  /mnt
+
+mkdir /var/lib/tftpboot/f30n #note foldername in this case for "Fedora 30 Netinst"
+
+cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30
+cp /mnt/images/pxeboot/initrd.img  /var/lib/tftpboot/f30
+```
+
+Create file /tftpboot/pxelinux.cfg/default
+
+```bash
+default menu.c32
+prompt 0
+timeout 3 #Timeout 10 is 1 second (Set to 3 here so it will autoboot)
+ONTIMEOUT Fedora30 #When time out is done it will boot Fedora 30
+
+MENU TITLE PXE Menu
+
+LABEL Fedora30
+kernel f30n/vmlinuz #kernel copied from earlier 
+#initrd copied from earlier                       #Kickstart file location                 #Local repo location
+append initrd=f30n/initrd.img ramdisk_size=100000 ks=http://192.168.1.20/ks/ks.cfg ip=dhcp inst.repo=http://192.168.1.20/30/Workstation/X86_64/os/ devfs=nomount
+
+#LABEL $OS_NAME
+#kernel $foldername/vmlinuz
+#append initrd=$foldername/initrd.img ramdisk_size=100000 ip=dhcp inst.repo=http://192.168.1.20/$repo devfs=nomount ks=http://192.168.1.20/ks/$ks
+```
+
+Copy the Kickstart file
+
+```bash
+mkdir /var/www/html/ks
+cd /var/www/html/ks
+wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/ks.cfg
+```
+
