@@ -98,7 +98,7 @@ mkdir 30
 cd 30
 wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
 ```
-FOR RHEL/CentOS ONLY
+[[[ FOR RHEL/CentOS ONLY ]]] 
 
 Mount the ISO and copy the files to use as a repo
 ```bash
