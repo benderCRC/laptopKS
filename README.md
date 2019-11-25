@@ -114,6 +114,7 @@ mkdir /var/lib/tftpboot/f30n #note folder name in this case for "Fedora 30 Netin
 cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30n
 cp /mnt/images/pxeboot/initrd.img  /var/lib/tftpboot/f30n
 ```
+Enter command: ```bash service dnsmasq restart```
 
 ## Configure the boot menu
 
