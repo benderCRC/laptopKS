@@ -178,5 +178,5 @@ cp ~/.kde/share/config/kdeglobals /var/www/html/kde
 
 ## Set autologon for KDE (OPTIONAL)
 
-Since these are for new users I set there to be an autologon untill they run the change password script
+Since these are for new users I set there to be an autologon until they run the change password script.
 I do this setting autologin in /etc/sddm.conf, then the conf file is deleted in my script to remove this
