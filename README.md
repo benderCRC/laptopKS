@@ -151,6 +151,16 @@ mkdir /var/www/html/ks
 cd /var/www/html/ks
 wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/ks.cfg
 ```
+## Copy the ChangePassword.sh script
+I created a script that uses Expect and TCL to make it simple for the user to change the user and root password
+It needs to be copied from my github to the /var/www/html/sh/ folder 
+```bash
+cd /var/www/html
+mkdir sh
+cd sh
+wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/CHANGE_PASSWORD.sh
+```
+A readme for this script is automatically created on the users desktop by the postinstall in the ks.cfg
 
 ## Copy my KDE folder 
 
