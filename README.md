@@ -105,7 +105,7 @@ Mount the ISO and copy the files to use as a repo
 mount -o loop $NAME_OF_CENTOS.iso  /mnt
 cp -r /mnt/*  /var/www/html/$NAME 
 ```
-====================================================
+===============================================
 
 Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
 
