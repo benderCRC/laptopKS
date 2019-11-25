@@ -88,7 +88,7 @@ dhcp-option=42,0.0.0.0
 enable-tftp
 tftp-root=/var/lib/tftpboot
 ```
-
+Enter command: ```service dnsmasq restart```
 ## Prepare the OS
 
 Copy repo for Fedora (30 in this example) if RHEL do the next part instead 
@@ -121,7 +121,6 @@ mkdir /var/lib/tftpboot/f30n #note folder name in this case for "Fedora 30 Netin
 cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30n
 cp /mnt/images/pxeboot/initrd.img  /var/lib/tftpboot/f30n
 ```
-Enter command: ```service dnsmasq restart```
 
 ## Configure the boot menu
 
