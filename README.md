@@ -96,7 +96,7 @@ Copy repo for Fedora (30 in this example) if RHEL do the next part instead
 cd /var/www/html
 mkdir 30
 cd 30
-wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
+wget --mirror --cut-dirs 4 -nH ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/x86_64/
 ```
 ============[[[ FOR RHEL/CentOS ONLY ]]]============
 
