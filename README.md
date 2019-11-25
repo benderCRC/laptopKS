@@ -31,9 +31,9 @@ The first NIC will connect to the internet, and the second NIC will connect to a
 
 [A simple way to do this is use a laptop connected to the Nokia-BYOD Wifi and use the eth0 as the 2nd NIC]
 
-The Second NIC will will need the IP Address of 192.168.1.20/24 (user NetworkManager)
+The Second NIC will will need the IP Address of 192.168.1.20/24 (use NetworkManager)
 
-After you set the static IP to the aforementioned address, change the methond in NetworkManager to "Shared with other computers" this should be under "Method" in NetworkManager, but remember it must be set to static first to set the IP
+After you set the static IP to the aforementioned address, change the method in NetworkManager to "Shared with other computers" this should be under "Method" in NetworkManager, but remember it must be set to static first to set the IP
 
 ## Software Installation
 
@@ -70,14 +70,6 @@ cp -r /usr/share/syslinux/* /var/lib/tftpboot
 ln -s  /var/lib/tftpboot/ /tftpboot
 mkdir /var/lib/tftpboot/pxelinux.cfg
 ```
-
-Copy repo for Fedora (30 in this example)
-```bash
-cd /var/www/html
-mkdir 30
-cd 30
-wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
-```
 Paste the following into /etc/dnsmasq.conf (Overwrite the existing config)
 ```bash
 # DHCP range-leases
@@ -97,20 +89,33 @@ enable-tftp
 tftp-root=/var/lib/tftpboot
 ```
 
+## Prepare the OS
+
+Copy repo for Fedora (30 in this example)
+```bash
+cd /var/www/html
+mkdir 30
+cd 30
+wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
+```
+
+
 Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
 
-For Fedora net install I download the iso then mount it and copy the files
+For Fedora net-install I download the iso then mount it and copy the files
 
 ```bash
 cd ~/Downloads
 wget https://mirrors.rit.edu/fedora/fedora/linux/releases/30/Server/x86_64/iso/Fedora-Server-dvd-x86_64-30-1.2.iso
 mount -o loop Fedora-Server-dvd-x86_64-30-1.2.iso  /mnt
 
-mkdir /var/lib/tftpboot/f30n #note foldername in this case for "Fedora 30 Netinst"
+mkdir /var/lib/tftpboot/f30n #note folder name in this case for "Fedora 30 Netinst"
 
-cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30
-cp /mnt/images/pxeboot/initrd.img  /var/lib/tftpboot/f30
+cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30n
+cp /mnt/images/pxeboot/initrd.img  /var/lib/tftpboot/f30n
 ```
+
+## Configure the boot menu
 
 Create file /tftpboot/pxelinux.cfg/default
 
@@ -132,7 +137,11 @@ append initrd=f30n/initrd.img ramdisk_size=100000 ks=http://192.168.1.20/ks/ks.c
 #append initrd=$foldername/initrd.img ramdisk_size=100000 ip=dhcp inst.repo=http://192.168.1.20/$repo devfs=nomount ks=http://192.168.1.20/ks/$ks
 ```
 
-Copy the Kickstart file
+## Copy the Kickstart file 
+
+Copy the Kickstart file (In this case from my github)
+
+Note that in the pxelinux.cfg/defualt the ks= is set to /ks/ks.cfg
 
 ```bash
 mkdir /var/www/html/ks
@@ -140,3 +149,20 @@ cd /var/www/html/ks
 wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/ks.cfg
 ```
 
+## KDE Settings (OPTIONAL)
+
+In my post install I use wget to copy KDE settings to the new install
+
+I make a folder "/var/www/html/kde" which will hold these config files
+
+Manually configure KDE on a box and copy the settings to this folder
+
+```bash
+cp ~/.config/plasma-org.kde.plasma.desktop-appletsrc /var/www/html/kde
+
+cp ~/.kde/share/config/kdeglobals /var/www/html/kde
+```
+
+## Set autologon for KDE (OPTIONAL)
+
+Since these are for new users I set there to be an autologon untill they run the change password script
