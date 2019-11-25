@@ -150,6 +150,18 @@ cd /var/www/html/ks
 wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/ks.cfg
 ```
 
+## Copy my KDE folder 
+
+```bash
+mkdir /var/www/html/kde
+cd /var/www/html/kde
+
+#From my github in this example
+wget https://github.com/benderCRC/laptopKS/blob/KDE/kde/kde.zip?raw=true
+```
+
+# Info on the KDE settings folder
+
 ## KDE Settings (OPTIONAL)
 
 In my post install I use wget to copy KDE settings to the new install
@@ -167,3 +179,4 @@ cp ~/.kde/share/config/kdeglobals /var/www/html/kde
 ## Set autologon for KDE (OPTIONAL)
 
 Since these are for new users I set there to be an autologon untill they run the change password script
+I do this setting autologin in /etc/sddm.conf, then the conf file is deleted in my script to remove this
