@@ -31,7 +31,9 @@ The first NIC will connect to the internet, and the second NIC will connect to a
 
 [A simple way to do this is use a laptop connected to the Nokia-BYOD Wifi and use the eth0 as the 2nd NIC]
 
-The Second NIC will will need the IP Address of 192.168.1.20/24
+The Second NIC will will need the IP Address of 192.168.1.20/24 (user NetworkManager)
+
+After you set the static IP to the aforementioned address, change the methond in NetworkManager to "Shared with other computers" this should be under "Method" in NetworkManager, but remember it must be set to static first to set the IP
 
 ## Software Installation
 
@@ -59,10 +61,12 @@ firewall-cmd --add-service=dhcp --permanent  	## Port 67
 firewall-cmd --add-port=69/udp --permanent  	## Port for TFTP
 firewall-cmd --add-port=4011/udp --permanent  ## Port for ProxyDHCP
 firewall-cmd --reload  ## Apply rules
+chkconfig iptables off #Turn off iptables
 ```
 
 Create the files
 ```bash
+cp -r /usr/share/syslinux/* /var/lib/tftpboot
 ln -s  /var/lib/tftpboot/ /tftpboot
 mkdir /var/lib/tftpboot/pxelinux.cfg
 ```
@@ -74,3 +78,22 @@ mkdir 30
 cd 30
 wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
 ```
+Paste the following into /etc/dnsmasq.conf (Overwrite the existing config)
+```bash
+# DHCP range-leases
+dhcp-range=enp1s0,192.168.1.3,192.168.1.253,255.255.255.0,1h
+# PXE
+dhcp-boot=pxelinux.0,pxeserver,192.168.1.20
+# Gateway
+dhcp-option=3,192.168.1.20
+# DNS
+dhcp-option=6,192.168.1.20, 8.8.8.8
+server=8.8.4.4
+# Broadcast Address
+dhcp-option=28,10.0.0.255
+# NTP Server
+dhcp-option=42,0.0.0.0
+enable-tftp
+tftp-root=/var/lib/tftpboot
+```
+
