@@ -160,7 +160,7 @@ cd /var/www/html/kde
 wget https://github.com/benderCRC/laptopKS/blob/KDE/kde/kde.zip?raw=true
 ```
 
-# Info on the KDE settings folder
+# Info on the KDE settings folder (IF YOU WANT TO REDO OR CHANGE SETTINGS)
 
 ## KDE Settings (OPTIONAL)
 
