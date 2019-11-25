@@ -70,7 +70,7 @@ cp -r /usr/share/syslinux/* /var/lib/tftpboot
 ln -s  /var/lib/tftpboot/ /tftpboot
 mkdir /var/lib/tftpboot/pxelinux.cfg
 ```
-Paste the following into /etc/dnsmasq.conf (Overwrite the existing config)
+Paste the following into ```/etc/dnsmasq.conf``` (Overwrite the existing config)
 ```bash
 # DHCP range-leases
 dhcp-range=enp1s0,192.168.1.3,192.168.1.253,255.255.255.0,1h
