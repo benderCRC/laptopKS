@@ -91,20 +91,22 @@ tftp-root=/var/lib/tftpboot
 
 ## Prepare the OS
 
-Copy repo for Fedora (30 in this example)
+Copy repo for Fedora (30 in this example) if RHEL do the next part instead 
 ```bash
 cd /var/www/html
 mkdir 30
 cd 30
 wget -r ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/
 ```
-[[[ FOR RHEL/CentOS ONLY ]]] 
+============[[[ FOR RHEL/CentOS ONLY ]]]============
 
 Mount the ISO and copy the files to use as a repo
 ```bash
 mount -o loop $NAME_OF_CENTOS.iso  /mnt
 cp -r /mnt/*  /var/www/html/$NAME 
 ```
+====================================================
+
 Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
 
 For Fedora net-install I download the iso then mount it and copy the files
