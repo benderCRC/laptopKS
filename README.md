@@ -163,13 +163,14 @@ wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/CHANGE_PASSWORD.sh
 A readme for this script is automatically created on the users desktop by the postinstall in the ks.cfg
 
 ## Copy my KDE folder 
-
+This folder holds all the custom kde settings for the user
 ```bash
 mkdir /var/www/html/kde
 cd /var/www/html/kde
 
 #From my github in this example
 wget https://github.com/benderCRC/laptopKS/blob/KDE/kde/kde.zip?raw=true
+unzip kde.zip
 ```
 
 # Info on the KDE settings folder (ONLY FOR REDO)
