@@ -113,6 +113,7 @@ cp -r /mnt/*  /var/www/html/$NAME
 Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
 
 For [Fedora] net-install I download the iso then mount it and copy the files
+
 (NOTE: The initrd and kernel might be in the repo that is mirrored, but these are untested)
 
 For [RHEL/CentOS] the image should already be mounted from the pervious step so start at the "RHEL START" comment
