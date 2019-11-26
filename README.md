@@ -74,7 +74,7 @@ mkdir /var/lib/tftpboot/pxelinux.cfg
 ```
 Paste the following into ```/etc/dnsmasq.conf``` (Overwrite the existing config)
 ```bash
-# DHCP range-leases
+# DHCP range-leases [USE SECOND NIC INTERFACE]
 dhcp-range=enp1s0,192.168.1.3,192.168.1.253,255.255.255.0,1h
 # PXE
 dhcp-boot=pxelinux.0,pxeserver,192.168.1.20
@@ -112,13 +112,17 @@ cp -r /mnt/*  /var/www/html/$NAME
 
 Copy initrd and kernel (vmlinuz) to /tftpboot/[name of os]
 
-For Fedora net-install I download the iso then mount it and copy the files
+For [Fedora] net-install I download the iso then mount it and copy the files
+                        The initrd and kernel might be in the repo, but these are untested
+
+For [RHEL/CentOS] the image should already be mounted from the pervious step so start at the "RHEL START" comment
 
 ```bash
 cd ~/Downloads
 wget https://dl.fedoraproject.org/pub/fedora/linux/releases/30/Workstation/x86_64/iso/Fedora-Workstation-netinst-x86_64-30-1.2.iso
 mount -o loop Fedora-Workstation-netinst-x86_64-30-1.2.iso  /mnt
 
+#RHEL START HERE
 mkdir /var/lib/tftpboot/f30n #note folder name in this case for "Fedora 30 Netinst"
 
 cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30n
@@ -141,7 +145,7 @@ MENU TITLE PXE Menu
 LABEL Fedora30
 kernel f30n/vmlinuz #kernel copied from earlier 
 #initrd copied from earlier                       #Kickstart file location                 #Local repo location
-append initrd=f30n/initrd.img ramdisk_size=100000 ks=http://192.168.1.20/ks/ks.cfg ip=dhcp inst.repo=http://192.168.1.20/30/Workstation/X86_64/os/ devfs=nomount
+append initrd=f30n/initrd.img ramdisk_size=100000 ks=http://192.168.1.20/ks/ks.cfg ip=dhcp inst.repo=http://192.168.1.20/30/Workstation/x86_64/os/ devfs=nomount
 
 #LABEL $OS_NAME
 #kernel $foldername/vmlinuz
