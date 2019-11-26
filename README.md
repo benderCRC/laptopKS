@@ -62,6 +62,8 @@ firewall-cmd --add-port=69/udp --permanent  	## Port for TFTP
 firewall-cmd --add-port=4011/udp --permanent  ## Port for ProxyDHCP
 firewall-cmd --reload  ## Apply rules
 chkconfig iptables off #Turn off iptables
+iptables -F
+systemctl stop firewalld
 ```
 
 Create the files
@@ -96,7 +98,8 @@ Copy repo for Fedora (30 in this example) if RHEL do the next part instead
 cd /var/www/html
 mkdir 30
 cd 30
-wget --mirror --cut-dirs 4 -nH ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/x86_64/
+wget --mirror --cut-dirs 4 -nH ftp://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/Workstation/x86_64/os/
+wget http://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/COMPOSE_ID
 ```
 ============[[[ FOR RHEL/CentOS ONLY ]]]============
 
@@ -113,15 +116,14 @@ For Fedora net-install I download the iso then mount it and copy the files
 
 ```bash
 cd ~/Downloads
-wget https://mirrors.rit.edu/fedora/fedora/linux/releases/30/Server/x86_64/iso/Fedora-Server-dvd-x86_64-30-1.2.iso
-mount -o loop Fedora-Server-dvd-x86_64-30-1.2.iso  /mnt
+wget https://dl.fedoraproject.org/pub/fedora/linux/releases/30/Workstation/x86_64/iso/Fedora-Workstation-netinst-x86_64-30-1.2.iso
+mount -o loop Fedora-Workstation-netinst-x86_64-30-1.2.iso  /mnt
 
 mkdir /var/lib/tftpboot/f30n #note folder name in this case for "Fedora 30 Netinst"
 
 cp /mnt/images/pxeboot/vmlinuz  /var/lib/tftpboot/f30n
 cp /mnt/images/pxeboot/initrd.img  /var/lib/tftpboot/f30n
 ```
-
 ## Configure the boot menu
 
 Create file /tftpboot/pxelinux.cfg/default
@@ -177,7 +179,7 @@ cd /var/www/html/kde
 
 #From my github in this example
 wget https://github.com/benderCRC/laptopKS/blob/KDE/kde/kde.zip?raw=true
-unzip kde.zip
+unzip *
 ```
 
 # Info on the KDE settings folder (ONLY FOR REDO)
