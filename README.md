@@ -4,9 +4,9 @@ An Anaconda KS to securely wipe a laptop and install Fedora with specific extra 
 
 ## NOTES
 
-This only works for Redhat based Linux distros that use Anaconda. RHEL/CentOS/Scientific Linux will all work. 
+This only works for Redhat based Linux distros that use Anaconda. RHEL/CentOS/Scientific Linux will all work.
 
-Fedora will work, but it only supports loading Kickstart files when using the Netinstall. 
+Fedora will work, but it only supports loading Kickstart files when using the Netinstall.
 For Fedora it is best to feed it the netinstall and clone an install repo locally.
 
 If you are doing diffrent systems it is important to see if the drivers are loaded automatically. If not figure out how to install them and use DMIDECODE on the post install to check for the system and install the drivers.
@@ -93,7 +93,7 @@ tftp-root=/var/lib/tftpboot
 Enter command: ```service dnsmasq restart```
 ## Prepare the OS
 
-Copy repo for Fedora (30 in this example) if RHEL do the next part instead 
+Copy repo for Fedora (30 in this example) if RHEL do the next part instead
 ```bash
 cd /var/www/html
 mkdir 30
@@ -106,7 +106,7 @@ wget http://mirror.csclub.uwaterloo.ca/fedora/linux/releases/30/COMPOSE_ID
 Mount the ISO and copy the files to use as a repo
 ```bash
 mount -o loop $NAME_OF_CENTOS.iso  /mnt
-cp -r /mnt/*  /var/www/html/$NAME 
+cp -r /mnt/*  /var/www/html/$NAME
 ```
 ===============================================
 
@@ -143,7 +143,7 @@ ONTIMEOUT Fedora30 #When time out is done it will boot Fedora 30
 MENU TITLE PXE Menu
 
 LABEL Fedora30
-kernel f30n/vmlinuz #kernel copied from earlier 
+kernel f30n/vmlinuz #kernel copied from earlier
 #initrd copied from earlier                       #Kickstart file location                 #Local repo location
 append initrd=f30n/initrd.img ramdisk_size=100000 ks=http://192.168.1.20/ks/ks.cfg ip=dhcp inst.repo=http://192.168.1.20/30/Workstation/x86_64/os/ devfs=nomount
 
@@ -162,27 +162,27 @@ Note that in the pxelinux.cfg/defualt the ks= is set to /ks/ks.cfg
 ```bash
 mkdir /var/www/html/ks
 cd /var/www/html/ks
-wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/ks.cfg
+wget https://raw.githubusercontent.com/benderCRC/laptopKS/master/ks.cfg
 ```
 ## Copy the ChangePassword.sh script
 I created a script that uses Expect and TCL to make it simple for the user to change the user and root password
-It needs to be copied from my github to the /var/www/html/sh/ folder 
+It needs to be copied from my github to the /var/www/html/sh/ folder
 ```bash
 cd /var/www/html
 mkdir sh
 cd sh
-wget https://raw.githubusercontent.com/benderCRC/laptopKS/KDE/CHANGE_PASSWORD.sh
+wget https://raw.githubusercontent.com/benderCRC/laptopKS/master/CHANGE_PASSWORD.sh
 ```
 A readme for this script is automatically created on the users desktop by the postinstall in the ks.cfg
 
-## Copy my KDE folder 
+## Copy my KDE folder
 This folder holds all the custom kde settings for the user
 ```bash
 mkdir /var/www/html/kde
 cd /var/www/html/kde
 
 #From my github in this example
-wget https://github.com/benderCRC/laptopKS/blob/KDE/kde/kde.zip?raw=true
+wget https://github.com/benderCRC/laptopKS/blob/master/kde/kde.zip?raw=true
 unzip *
 ```
 
